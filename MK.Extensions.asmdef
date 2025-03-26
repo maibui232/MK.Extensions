@@ -1,0 +1,22 @@
+{
+  "name": "MK.Extensions",
+  "rootNamespace": "MK.Extensions",
+  "references": [
+    "VContainer"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [
+    {
+      "name": "jp.hadashikick.vcontainer",
+      "expression": "1.0.0",
+      "define": "MK_VCONTAINER"
+    }
+  ],
+  "noEngineReferences": false
+}
