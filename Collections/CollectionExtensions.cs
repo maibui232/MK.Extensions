@@ -6,6 +6,14 @@ namespace MK.Extensions
 
     public static class CollectionExtensions
     {
+        public static void ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
+        {
+            foreach (var element in sequence)
+            {
+                action(element);
+            }
+        }
+
         public static T Random<T>(this IEnumerable<T> sequence)
         {
             return sequence switch
@@ -53,9 +61,6 @@ namespace MK.Extensions
             return default;
         }
 
-        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> enumerable)
-        {
-            return enumerable.OrderBy(e => new Guid());
-        }
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> enumerable) { return enumerable.OrderBy(e => new Guid()); }
     }
 }
