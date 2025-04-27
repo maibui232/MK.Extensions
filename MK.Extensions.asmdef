@@ -2,7 +2,8 @@
   "name": "MK.Extensions",
   "rootNamespace": "MK.Extensions",
   "references": [
-    "VContainer"
+    "VContainer",
+    "MK.Log"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
