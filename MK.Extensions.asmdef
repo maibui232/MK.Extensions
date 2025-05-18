@@ -3,7 +3,8 @@
   "rootNamespace": "MK.Extensions",
   "references": [
     "VContainer",
-    "MK.Log"
+    "MK.Log",
+    "UniTask"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
