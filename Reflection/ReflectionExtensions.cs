@@ -2,6 +2,7 @@ namespace MK.Extensions
 {
     using System;
     using System.Linq;
+    using System.Reflection;
 
     public static class ReflectionExtensions
     {
@@ -34,6 +35,18 @@ namespace MK.Extensions
                .SelectMany(asm => asm.GetTypes())
                .Where(type => !type.IsAbstract && type.IsSubclassOf(baseType))
                .ToArray();
+        }
+
+        public static ConstructorInfo GetSingleConstructor(this Type type)
+        {
+            var ctors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+            return ctors.Length switch
+                   {
+                       1   => ctors[0],
+                       > 1 => throw new AmbiguousMatchException($"{type.FullName} must have exactly one public constructor."),
+                       _   => throw new AmbiguousMatchException($"{type.FullName} must have one public constructor.")
+                   };
         }
     }
 }
