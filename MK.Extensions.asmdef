@@ -2,8 +2,6 @@
   "name": "MK.Extensions",
   "rootNamespace": "MK.Extensions",
   "references": [
-    "VContainer",
-    "MK.Log",
     "UniTask"
   ],
   "includePlatforms": [],
@@ -13,12 +11,6 @@
   "precompiledReferences": [],
   "autoReferenced": true,
   "defineConstraints": [],
-  "versionDefines": [
-    {
-      "name": "jp.hadashikick.vcontainer",
-      "expression": "1.0.0",
-      "define": "MK_VCONTAINER"
-    }
-  ],
+  "versionDefines": [],
   "noEngineReferences": false
 }
