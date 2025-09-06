@@ -1,6 +1,7 @@
 namespace MK.Extensions
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
 
@@ -13,7 +14,7 @@ namespace MK.Extensions
 
         public static Type GetSingleDerived(this Type baseType)
         {
-            var derivedTypes = baseType.GetDerivedTypes();
+            var derivedTypes = baseType.GetDerivedTypes().ToArray();
             switch (derivedTypes.Length)
             {
                 case 0:  throw new ArrayTypeMismatchException($"{baseType.FullName} must be one or more derived types.");
@@ -22,19 +23,23 @@ namespace MK.Extensions
             }
         }
 
-        public static Type[] GetDerivedTypes<T>()
+        public static IEnumerable<Type> GetDerivedTypes<T>()
         {
             var baseType = typeof(T);
 
             return baseType.GetDerivedTypes();
         }
-
-        public static Type[] GetDerivedTypes(this Type baseType)
+        
+        public static IEnumerable<Type> GetDerivedTypes(this Type baseType)
         {
             return AppDomain.CurrentDomain.GetAssemblies()
-               .SelectMany(asm => asm.GetTypes())
-               .Where(type => !type.IsAbstract && type.IsSubclassOf(baseType))
-               .ToArray();
+               .Where(asm => !asm.IsDynamic)
+               .SelectMany(baseType.GetDerivedTypes);
+        }
+
+        public static IEnumerable<Type> GetDerivedTypes(this Type baseType, Assembly assembly)
+        {
+            return assembly.GetTypes().Where(type => !type.IsAbstract && baseType.IsAssignableFrom(type));
         }
 
         public static ConstructorInfo GetSingleConstructor(this Type type)
