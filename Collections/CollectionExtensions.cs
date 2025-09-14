@@ -6,6 +6,15 @@ namespace MK.Extensions
 
     public static class CollectionExtensions
     {
+        public static T[] Sort<T>(this IEnumerable<T> sequence)
+        {
+            if (sequence is T[] array) return array;
+            array = sequence.ToArray();
+            Array.Sort(array);
+
+            return array;
+        }
+        
         public static void ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
         {
             foreach (var element in sequence)
